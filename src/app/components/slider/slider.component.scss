@@ -1,0 +1,35 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200italic,300,300italic,regular,italic,600,600italic,700,700italic,900,900italic);
+
+.slider {
+  text-align: center;
+  margin: 0 5% 1%;
+  overflow: hidden;
+
+  &__track {
+    display: flex;
+    flex-direction: row;
+    width: 13 * 18.9vw;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &__button {
+    background-color: white;
+    border: 2px solid rgb(37, 37, 54);
+    padding: 12px 45px;
+    cursor: pointer;
+    border-radius: 45px;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 7px;
+    outline: none;
+  }
+
+  &__button:hover {
+    border-color: white;
+    transform: translateY(7px);
+  }
+
+  &__left {
+    margin-right: 2%;
+  }
+}

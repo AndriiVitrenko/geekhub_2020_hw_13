@@ -1,0 +1,13 @@
+.slider {
+    &__item {
+        margin-right: 0.01*90vw;
+        width: 1/5*90vw;
+    }
+
+    &__image img {
+        display: block;
+        width: 100%;
+        pointer-events: none;
+        user-select: none;
+    }
+}
