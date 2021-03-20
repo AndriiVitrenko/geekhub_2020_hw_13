@@ -1,10 +1,18 @@
 <div class="slider">
-    <div class="slider__track" [style.transform]="'translateX('+translate+'px)'" (mousedown)="onDragStart($event)" (mouseup)="onDragEnd($event)">
+    <div
+      class="slider__track"
+      [class.animated]="!isActive"
+      (mousedown)="onDragStart($event)"
+      (mouseup)="onDragEnd($event)"
+      (mousemove)="onDragMove($event)"
+      (mouseleave)="onDragEnd($event)"
+      [ngStyle]="{'transform': 'translateX('+ translate + 'px' +')'}"
+    >
         <app-slider-item *ngFor="let slide of slides"
         [slide]="slide"
         ></app-slider-item>
     </div>
-    
+
     <button class="slider__button slider__left" (click)="previous()" ><i class="fas fa-arrow-left"></i></button>
     <button class="slider__button slider__right" (click)="next()" ><i class="fas fa-arrow-right"></i></button>
 </div>

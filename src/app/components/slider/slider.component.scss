@@ -10,6 +10,10 @@
     flex-direction: row;
     width: 13 * 18.9vw;
     align-items: center;
+    transition: all 0s ease-in-out;
+  }
+
+  &__track.animated {
     transition: all 0.3s ease-in-out;
   }
 

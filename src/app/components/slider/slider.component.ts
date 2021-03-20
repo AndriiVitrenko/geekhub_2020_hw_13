@@ -6,12 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./slider.component.scss'],
 })
 export class SliderComponent implements OnInit {
+  context: this;
   title = 'something';
   currentSlideIndex = 0;
   slides: [string] = [''];
-  lastPosition: number;
+  startPosition: number;
+  lastTranslate: number;
   bodyWidth: number = document.body.offsetWidth;
   translate: number = -0.189 * this.bodyWidth * this.currentSlideIndex;
+  isActive = false;
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
@@ -45,24 +48,34 @@ export class SliderComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onDragStart(event: MouseEvent) {
-    this.lastPosition = this.lastPosition || event.clientX;
-    const target = event.currentTarget as HTMLElement;
-    target.style.transition = '0s';
-    target.addEventListener('mousemove', this.onDragMove.bind(this), true);
+    this.startPosition = this.startPosition || event.clientX;
+    this.lastTranslate = this.translate;
+    this.isActive = true;
+    console.log('Start params:', this.lastTranslate, this.startPosition)
   }
 
   // tslint:disable-next-line:typedef
   onDragMove(event: MouseEvent) {
-    const translate = event.clientX - this.lastPosition - 0.05 * this.bodyWidth;
+    if (this.isActive) {
+      const translate = this.lastTranslate + event.clientX - this.startPosition;
 
-    this.translate = translate > 0 ? 0 : translate;
+      if (translate > 0) {
+        this.translate = 0;
+      }
+      else if (translate < -1.526 * this.bodyWidth) {
+        this.translate = -1.526 * this.bodyWidth;
+      }
+      else {
+        this.translate = translate
+      }
+    }
   }
 
   // tslint:disable-next-line:typedef
   onDragEnd(event: MouseEvent) {
-    const target = event.currentTarget as HTMLElement;
-    target.style.transition = '0.3s';
-    target.removeEventListener('mousemove', this.onDragMove, true);
-    console.log(event.currentTarget);
+    this.isActive = false;
+    this.lastTranslate = this.translate;
+    this.currentSlideIndex = Math.round(this.translate / (-0.189) / this.bodyWidth)
+    console.log('End params:', this.lastTranslate, this.startPosition)
   }
 }
