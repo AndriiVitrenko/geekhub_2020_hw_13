@@ -48,10 +48,11 @@ export class SliderComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onDragStart(event: MouseEvent) {
-    this.startPosition = this.startPosition || event.clientX;
+    this.startPosition = event.clientX;
     this.lastTranslate = this.translate;
     this.isActive = true;
     console.log('Start params:', this.lastTranslate, this.startPosition)
+    this.onDragMove(event)
   }
 
   // tslint:disable-next-line:typedef
@@ -73,6 +74,7 @@ export class SliderComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onDragEnd(event: MouseEvent) {
+    this.onDragMove(event)
     this.isActive = false;
     this.lastTranslate = this.translate;
     this.currentSlideIndex = Math.round(this.translate / (-0.189) / this.bodyWidth)
