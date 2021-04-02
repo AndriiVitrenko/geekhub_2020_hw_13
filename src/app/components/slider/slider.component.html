@@ -3,9 +3,9 @@
       class="slider__track"
       [class.animated]="!isActive"
       (mousedown)="onDragStart($event)"
-      (mouseup)="onDragEnd($event)"
+      (mouseup)="onDragEnd()"
       (mousemove)="onDragMove($event)"
-      (mouseleave)="onDragEnd($event)"
+      (mouseleave)="onDragEnd()"
       [ngStyle]="{'transform': 'translateX('+ translate + 'px' +')'}"
     >
         <app-slider-item *ngFor="let slide of slides"
@@ -13,6 +13,17 @@
         ></app-slider-item>
     </div>
 
-    <button class="slider__button slider__left" (click)="previous()" ><i class="fas fa-arrow-left"></i></button>
-    <button class="slider__button slider__right" (click)="next()" ><i class="fas fa-arrow-right"></i></button>
+    <button 
+      class="slider__button slider__left" 
+      (click)="previous()"
+      [disabled]="!translate" >
+      <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <button 
+      class="slider__button slider__right" 
+      (click)="next()" 
+      [disabled]="currentSlideIndex >= 9">
+      <i class="fas fa-arrow-right"></i>
+    </button>
 </div>

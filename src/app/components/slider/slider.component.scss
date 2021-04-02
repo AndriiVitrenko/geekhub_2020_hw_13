@@ -11,6 +11,7 @@
     width: 13 * 18.9vw;
     align-items: center;
     transition: all 0s ease-in-out;
+    margin-bottom: 1%;
   }
 
   &__track.animated {
@@ -35,5 +36,10 @@
 
   &__left {
     margin-right: 2%;
+  }
+
+  &__button:disabled {
+    background-color: #ccc;
+    border-color: transparent;
   }
 }
